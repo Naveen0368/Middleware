@@ -1,0 +1,5 @@
+---
+- name: Restart MQ Process
+      service:
+        name: mq_service_name
+        state: restarted

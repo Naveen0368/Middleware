@@ -1,0 +1,8 @@
+---
+- name: Monitor CPU, Disk, and Memory Usage
+      shell: |
+        vmstat 1 5
+        iostat -xz 1 5
+        free -m
+      register: system_usage
+      failed_when: "'90' in system_usage.stdout"

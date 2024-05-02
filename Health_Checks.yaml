@@ -1,0 +1,8 @@
+---
+- name: Perform Health Checks
+      uri:
+        url: <http://localhost/health>
+        method: GET
+        return_content: yes
+      register: health_check
+      failed_when: health_check.status != 200

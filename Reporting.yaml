@@ -1,0 +1,28 @@
+---
+- name: Generate and Send System Report
+      block:
+        - name: Gather system info
+          setup:
+
+        - name: Save system report
+          copy:
+            content: |
+              System Report:
+              Date: {{ ansible_date_time.date }}
+              CPU Usage: {{ ansible_processor_vcpus }}
+              Memory Usage: {{ ansible_memtotal_mb }}
+              Disk Usage: {{ ansible_devices.sda.size }}
+            dest: /tmp/system_report.txt
+
+        - name: Send system report via email
+          mail:
+            host: smtp.example.com
+            port: 587
+            username: user@example.com
+            password: "{{ email_password }}"
+            to: Admin <admin@example.com>
+            subject: System Report
+            body: File attached...
+            attach: /tmp/system_report.txt
+      when: inventory_hostname == 'reporting_host'
+

@@ -1,0 +1,6 @@
+---
+ - name: Restart Cluster Process
+      service:
+        name: cluster_process_name
+        state: restarted
+      when: ansible_facts.services["cluster_process_name.service"].state != "running"

@@ -1,0 +1,5 @@
+---
+- name: Restart Web Server Process
+      service:
+        name: webserver_service_name
+        state: restarted

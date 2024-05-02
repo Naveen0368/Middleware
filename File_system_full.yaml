@@ -1,0 +1,5 @@
+---
+- name: Check for Full File System
+      shell: df -h | grep -P '9[0-9]%|100%'
+      register: disk_full
+      failed_when: disk_full.stdout != ""
